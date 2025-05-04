@@ -39,10 +39,10 @@ return {
 		},
 		cmd = "Telescope",
 		opts = {
-            defaults = {
-                border =false,
-                borderchars =nil
-            },
+			defaults = {
+				border = false,
+				borderchars = nil,
+			},
 			extensions = {
 				fzf = {
 					fuzzy = true,
@@ -63,5 +63,12 @@ return {
 		"MagicDuck/grug-far.nvim",
 		cmd = "GrugFar",
 		opts = {},
+	},
+
+	{
+		{
+			"kylechui/nvim-surround",
+			event = "VeryLazy",
+		},
 	},
 }
