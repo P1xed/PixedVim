@@ -56,11 +56,12 @@ return {
 
     {
         "saghen/blink.cmp",
-        dependencies = { "rafamadriz/friendly-snippets" },
+        dependencies = { "rafamadriz/friendly-snippets", "xzbdmw/colorful-menu.nvim" },
         version = "*",
         opts = {
             keymap = { preset = "super-tab" },
             completion = { documentation = { auto_show = true } },
+            signature = { enabled = true },
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
             },
@@ -114,7 +115,7 @@ return {
         event = "VeryLazy",
         config = function()
             require("nvim-treesitter.configs").setup({
-                rensure_isinstall = { "lua", "cpp" },
+                rensure_isinstall = { "lua", "cpp", "markdown", "markdown_inline" },
             })
         end,
     },
@@ -146,12 +147,14 @@ return {
                 },
             },
             outline = {
+                auto_preview = true,
+                show_icon = true,
                 keys = {
                     quit = "q",
-                    toggle_or_open = "<Tab>",
-                    exec = "<CR>",
+                    toggle_or_jump = "<CR>",
                 },
             },
+            symbol_in_winbar = { enable = false },
             terminal = {
                 layout = "horizontal",
                 enter_on_open = true,
@@ -161,10 +164,6 @@ return {
         config = function(_, opts)
             require("lspsaga").setup(opts)
         end,
-        event = "VeryLazy",
-    },
-    {
-        "mfussenegger/nvim-dap",
         event = "VeryLazy",
     },
 }
