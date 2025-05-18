@@ -22,3 +22,5 @@ vim.opt.showmode = false
 
 vim.g.loaded_netrw = 1
 vim.g.load_netrewPlugin = 1
+
+vim.opt.scrolloff = 10
