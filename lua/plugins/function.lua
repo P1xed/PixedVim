@@ -1,7 +1,7 @@
 return {
     {
         "windwp/nvim-autopairs",
-        event = "InsertEnter",
+        event = "VeryLazy",
         opts = {},
         config = function()
             local autopairs = require("nvim-autopairs")
@@ -37,7 +37,7 @@ return {
                     .. "cmake --install build --prefix build",
             },
         },
-        cmd = "Telescope",
+        event = "VeryLazy",
         opts = {
             defaults = {
                 border = false,
@@ -61,7 +61,7 @@ return {
 
     {
         "MagicDuck/grug-far.nvim",
-        cmd = "GrugFar",
+        event = "VeryLazy",
         opts = {},
     },
 
