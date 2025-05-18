@@ -8,6 +8,8 @@ vim.keymap.set("n", "<leader>ws", "<Cmd>vsplit<CR>", { silent = true })
 vim.keymap.set("n", "<leader>wS", "<Cmd>split<CR>", { silent = true })
 vim.keymap.set("n", "<leader>wq", "<Cmd>close<CR>", { silent = true })
 vim.keymap.set("n", "<leader>wo", "<Cmd>only<CR>", { silent = true })
+vim.keymap.set("n", "<leader>wn", "<Cmd>BufferLineCycleNext<CR>", { silent = true })
+vim.keymap.set("n", "<leader>wp", "<Cmd>BufferLineCyclePrev<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>lf", "<Cmd>lua vim.lsp.buf.format()<CR>", { silent = true })
 
