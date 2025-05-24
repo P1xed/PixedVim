@@ -1,5 +1,18 @@
 return {
 	{
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+		event = "VeryLazy",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				rensure_isinstall = { "lua", "cpp", "markdown", "markdown_inline" ,"yaml"},
+				auto_install = true,
+			})
+		end,
+	},
+	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
