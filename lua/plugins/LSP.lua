@@ -28,12 +28,6 @@ return {
 				},
 			})
 			require("lspconfig")["clangd"].setup({
-				typefiles = {
-					"c",
-					"cc",
-					"cpp",
-					"c++",
-				},
 				cmd = {
 					"clangd",
 					"--header-insertion=never",
@@ -56,7 +50,11 @@ return {
 
 	{
 		"saghen/blink.cmp",
-		dependencies = { "xzbdmw/colorful-menu.nvim" },
+		dependencies = {
+			"xzbdmw/colorful-menu.nvim",
+			"onsails/lspkind.nvim",
+			"nvim-tree/nvim-web-devicons",
+		},
 		version = "1.*",
 		opts = {
 			keymap = { preset = "super-tab" },
@@ -65,6 +63,43 @@ return {
 				list = { selection = { preselect = false, auto_insert = true } },
 				keyword = { range = "full" },
 				trigger = { show_on_trigger_character = true, show_on_blocked_trigger_characters = { " ", "\n", "\t" } },
+				menu = {
+					draw = {
+						components = {
+							kind_icon = {
+								text = function(ctx)
+									local icon = ctx.kind_icon
+									if vim.tbl_contains({ "Path" }, ctx.source_name) then
+										local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+										if dev_icon then
+											icon = dev_icon
+										end
+									else
+										icon = require("lspkind").symbolic(ctx.kind, {
+											mode = "symbol",
+										})
+									end
+
+									return icon .. ctx.icon_gap
+								end,
+
+								-- Optionally, use the highlight groups from nvim-web-devicons
+								-- You can also add the same function for `kind.highlight` if you want to
+								-- keep the highlight groups in sync with the icons.
+								highlight = function(ctx)
+									local hl = ctx.kind_hl
+									if vim.tbl_contains({ "Path" }, ctx.source_name) then
+										local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+										if dev_icon then
+											hl = dev_hl
+										end
+									end
+									return hl
+								end,
+							},
+						},
+					},
+				},
 			},
 			signature = { enabled = true },
 			sources = {
@@ -82,17 +117,6 @@ return {
 				end,
 				keymap = {
 					preset = "super-tab",
-				},
-				completion = {
-					menu = {
-						auto_show = true,
-						draw = {
-							columns = {
-								{ "label", "label_description", gap = 1 },
-								{ "kind_icon", "kind" },
-							},
-						},
-					},
 				},
 			},
 			fuzzy = { implementation = "lua" },
@@ -117,7 +141,6 @@ return {
 			})
 		end,
 	},
-
 
 	{
 		"nvimdev/lspsaga.nvim",
