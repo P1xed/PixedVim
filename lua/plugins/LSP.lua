@@ -57,6 +57,7 @@ return {
 		},
 		version = "1.*",
 		opts = {
+			signature = { enabled = true },
 			keymap = { preset = "super-tab" },
 			completion = {
 				documentation = { auto_show = true },
@@ -97,7 +98,6 @@ return {
 					},
 				},
 			},
-			signature = { enabled = true },
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer" },
 			},
