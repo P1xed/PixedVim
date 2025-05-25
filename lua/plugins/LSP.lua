@@ -57,7 +57,7 @@ return {
 		},
 		version = "1.*",
 		opts = {
-			signature = { enabled = true },
+			signature = { enabled = true, window = { show_documentation = true } },
 			keymap = { preset = "super-tab" },
 			completion = {
 				documentation = { auto_show = true },
