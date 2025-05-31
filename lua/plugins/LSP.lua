@@ -65,8 +65,17 @@ return {
 				keyword = { range = "full" },
 				trigger = { show_on_trigger_character = true, show_on_blocked_trigger_characters = { " ", "\n", "\t" } },
 				menu = {
+					max_height = 50,
 					draw = {
 						components = {
+							label = {
+								text = function(ctx)
+									return require("colorful-menu").blink_components_text(ctx)
+								end,
+								highlight = function(ctx)
+									return require("colorful-menu").blink_components_highlight(ctx)
+								end,
+							},
 							kind_icon = {
 								text = function(ctx)
 									local icon = ctx.kind_icon
@@ -102,6 +111,11 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 			},
 			cmdline = {
+				completion = {
+					menu = {
+						auto_show = true,
+					},
+				},
 				sources = function()
 					local cmd_type = vim.fn.getcmdtype()
 					if cmd_type == "/" then
@@ -113,17 +127,6 @@ return {
 				end,
 				keymap = {
 					preset = "super-tab",
-				},
-				completion = {
-					menu = {
-						auto_show = true,
-						draw = {
-							columns = {
-								{ "label", "label_description", gap = 1 },
-								{ "kind_icon", "kind" },
-							},
-						},
-					},
 				},
 			},
 			fuzzy = { implementation = "lua" },
