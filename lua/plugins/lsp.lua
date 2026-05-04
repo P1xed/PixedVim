@@ -10,7 +10,24 @@ function M.setup()
     vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, vim.tbl_extend('force', opts, { desc = 'Go to implementation' }))
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = 'Hover documentation' }))
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = 'Rename symbol' }))
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, vim.tbl_extend('force', opts, { desc = 'Code action' }))
+    vim.keymap.set('n', '<leader>ca', function()
+      local bufnr = vim.api.nvim_get_current_buf()
+
+      vim.lsp.buf_request(bufnr, 'textDocument/codeAction',
+        vim.lsp.util.make_range_params(), function(_, result, _, _)
+          if not result or #result == 0 then
+            vim.notify('No code actions available', vim.log.levels.INFO)
+            return
+          end
+
+          if #result == 1 then
+            vim.lsp.buf.execute_command(result[1].command)
+            vim.notify('Applied: ' .. result[1].title, vim.log.levels.INFO)
+          else
+            vim.lsp.buf.code_action()
+          end
+        end)
+    end, vim.tbl_extend('force', opts, { desc = 'Code action (auto-apply if single)' }))
     vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, vim.tbl_extend('force', opts, { desc = 'Format buffer' }))
     vim.keymap.set('n', '<leader>di', vim.diagnostic.open_float, vim.tbl_extend('force', opts, { desc = 'Show diagnostics' }))
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, vim.tbl_extend('force', opts, { desc = 'Previous diagnostic' }))
