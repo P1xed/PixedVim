@@ -2,15 +2,15 @@ vim.loader.enable()
 
 vim.opt.runtimepath:append(vim.fn.stdpath('config'))
 
-package.path = vim.fn.stdpath('config') .. '/lua/?.lua;' .. package.path
+package.path = vim.fn.stdpath('config') .. '/?.lua;' .. package.path
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-require('lua.config.options')
-require('lua.config.diagnostics')
-require('lua.config.keymaps').setup()
-require('lua.config.autocmds').setup()
+require('config.options')
+require('config.diagnostics')
+require('config.keymaps').setup()
+require('config.autocmds').setup()
 
 vim.pack.add({
   {
@@ -55,8 +55,8 @@ vim.pack.add({
   },
 }, { load = true, confirm = false })
 
-require('lua.plugins.mini').setup()
-require('lua.plugins.neo-tree').setup()
-require('lua.plugins.toggleterm').setup()
-require('lua.plugins.lsp').setup()
-require('lua.plugins.indent-blankline').setup()
+require('plugins.mini').setup()
+require('plugins.neo-tree').setup()
+require('plugins.toggleterm').setup()
+require('plugins.lsp').setup()
+require('plugins.indent-blankline').setup()
