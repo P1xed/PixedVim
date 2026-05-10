@@ -1,10 +1,12 @@
 vim.loader.enable()
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+require('lua.config.options')
+require('lua.config.diagnostics')
+require('lua.config.keymaps').setup()
+require('lua.config.autocmds').setup()
 
 vim.pack.add({
   {
@@ -44,24 +46,13 @@ vim.pack.add({
     name = 'nvim-lspconfig',
   },
   {
-    src = 'https://github.com/ibhagwan/fzf-lua',
-    name = 'fzf-lua',
-  },
-  {
     src = 'https://github.com/lukas-reineke/indent-blankline.nvim',
     name = 'indent-blankline',
   },
 }, { load = true, confirm = false })
 
-require('lua.config.options')
-require('lua.config.autocmds').setup()
-require('lua.config.diagnostics').setup()
-require('lua.config.keymaps').setup()
-
 require('lua.plugins.mini').setup()
-require('lua.plugins.treesitter').setup()
 require('lua.plugins.neo-tree').setup()
 require('lua.plugins.toggleterm').setup()
 require('lua.plugins.lsp').setup()
-require('lua.plugins.fzf').setup()
 require('lua.plugins.indent-blankline').setup()
