@@ -1,5 +1,7 @@
 vim.loader.enable()
 
+vim.opt.runtimepath:append(vim.fn.stdpath('config'))
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
