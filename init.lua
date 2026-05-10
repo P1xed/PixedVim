@@ -2,6 +2,8 @@ vim.loader.enable()
 
 vim.opt.runtimepath:append(vim.fn.stdpath('config'))
 
+package.path = vim.fn.stdpath('config') .. '/lua/?.lua;' .. package.path
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
