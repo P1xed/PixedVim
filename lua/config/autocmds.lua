@@ -12,13 +12,15 @@ function M.setup()
   vim.api.nvim_create_autocmd('FileType', {
     callback = function()
       local ft = vim.bo.filetype
-      if ft == 'neo-tree' or ft == 'neo-tree-popup' or ft == 'toggleterm' then
+      if ft == 'neo-tree' or ft == 'neo-tree-popup' or ft == 'toggleterm' or ft == '' then
         return
       end
-      vim.treesitter.start()
-      vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      vim.wo[0][0].foldmethod = 'expr'
-      vim.bo[0].indentexpr = 'v:lua.vim.treesitter.indentexpr()'
+      local ok, _ = pcall(vim.treesitter.start)
+      if ok then
+        vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo[0][0].foldmethod = 'expr'
+        vim.bo[0].indentexpr = 'v:lua.vim.treesitter.indentexpr()'
+      end
     end,
   })
 
